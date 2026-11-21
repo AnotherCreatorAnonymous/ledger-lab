@@ -88,6 +88,7 @@ module "app" {
   logs_enabled          = local.is_prod
   rbac_propagation_wait = var.rbac_propagation_wait
   tags                  = local.tags
+  resource_group_id     = azurerm_resource_group.this.id
 
   environment_variables = {
     APP_ENV     = var.environment
