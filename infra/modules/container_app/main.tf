@@ -25,12 +25,13 @@ resource "azurerm_log_analytics_workspace" "this" {
 }
 
 resource "azurerm_container_app_environment" "this" {
-  name                       = "cae-${var.name}"
-  resource_group_name        = var.resource_group_name
-  location                   = var.location
-  logs_destination           = var.logs_enabled ? "log-analytics" : null
-  log_analytics_workspace_id = var.logs_enabled ? azurerm_log_analytics_workspace.this[0].id : null
-  tags                       = var.tags
+  name                               = "cae-${var.name}"
+  resource_group_name                = var.resource_group_name
+  location                           = var.location
+  infrastructure_resource_group_name = "me-${var.name}"
+  logs_destination                   = var.logs_enabled ? "log-analytics" : null
+  log_analytics_workspace_id         = var.logs_enabled ? azurerm_log_analytics_workspace.this[0].id : null
+  tags                               = var.tags
 
   # Azure lo agrega siempre; declararlo evita un cambio perpetuo en cada plan. No tiene cargo fijo.
   workload_profile {
