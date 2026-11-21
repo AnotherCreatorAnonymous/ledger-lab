@@ -29,6 +29,11 @@ mock_provider "azurerm" {
       principal_id = "00000000-0000-0000-0000-000000000003"
     }
   }
+  mock_resource "azurerm_resource_group" {
+    defaults = {
+      id = "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg"
+    }
+  }
   mock_resource "azurerm_container_app_environment" {
     defaults = {
       id = "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/cae"
@@ -46,7 +51,13 @@ mock_provider "azurerm" {
   }
 }
 
-mock_provider "azapi" {}
+mock_provider "azapi" {
+  mock_resource "azapi_resource" {
+    defaults = {
+      id = "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/cae"
+    }
+  }
+}
 mock_provider "random" {}
 mock_provider "time" {}
 

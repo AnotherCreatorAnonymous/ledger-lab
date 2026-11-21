@@ -28,16 +28,11 @@ resource "azurerm_log_analytics_workspace" "this" {
   tags                = var.tags
 }
 
-data "azurerm_resource_group" "this" {
-  parent_id = var.resource_group_id
-  name      = var.resource_group_name
-}
-
 resource "azapi_resource" "env" {
   type                      = "Microsoft.App/managedEnvironments@2026-01-01"
   name                      = "cae-${var.name}"
   location                  = var.location
-  parent_id                 = data.azurerm_resource_group.this.id
+  parent_id                 = var.resource_group_id
   tags                      = var.tags
   schema_validation_enabled = false
 
