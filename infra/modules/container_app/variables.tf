@@ -68,3 +68,8 @@ variable "tags" {
   type        = map(string)
   default     = {}
 }
+
+variable "resource_group_id" {
+  description = "ID completo del grupo de recursos donde vive el entorno."
+  type        = string
+}
